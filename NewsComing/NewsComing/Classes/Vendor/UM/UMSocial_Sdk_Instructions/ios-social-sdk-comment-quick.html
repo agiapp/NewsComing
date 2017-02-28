@@ -1,0 +1,67 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>评论 快速集成</h1>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#umeng_social">产品概述</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#quick_use">下载并安装SDK</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#add_code">集成代码</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#advance_use">进阶使用</a></li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="umeng_social" id="umeng_social" style="color:black"> 产品概述</a></h2>
+<p>通过评论组件，用户可以针对应用中一篇文章，一首歌曲等内容发表评论，并可同步到微博。喜欢组件会增强用户和应用的交互频率，提高用户的活跃率和留存率。</p>
+<h2>2 <a name="quick_use" id="quick_use" style="color:black">下载并安装SDK</a></h2>
+<h3>Step1</h3>
+<p>下载 <a href="http://dev.umeng.com/social/ios/sdk-download" style="text-decoration:none" target="_blank">最新版SDK</a></p>
+<h3>Step2</h3>
+<p>确认你使用的XCode版本在4.4以上，工程的Base SDK和iOS Deployment Target在iOS4.3以上</p>
+<h3>Step3</h3>
+<p>解压SDK压缩包，将其中形如UMSocial_Sdk_x.x.x的文件夹拖入工程目录：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_drag_sdk.png" title="drag_sdk" /> </p>
+<h3>Step4</h3>
+<p>确认勾选了“Copy items to destination's group folder”选项，并选择你要添加到的Target: </p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_check_tip.png" title="check_tip" /> </p>
+<p>现在应该是这样的效果：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_project_structure.png" title="project_structure" /> </p>
+<h2>3 <a name="add_code" id="add_code" style="color:black">集成代码</a></h2>
+<h3>设置友盟Appkey</h3>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [UMSocialData setAppKey:@&quot;507fcab25270157b37000010&quot;];
+}
+</code></pre>
+
+<h3>得到一个评论列表</h3>
+<pre><code>#import UMSocialControllerServiceComment.h
+……
+UINavigationController *commentList = [[UMSocialControllerServiceComment defaultControllerService] getSocialCommentListController];
+[self presentModalViewController:commentList animated:YES];
+</code></pre>
+
+<p><img alt="socialbar" src="http://dev.umeng.com/images/ios/social_commentlist.png" title="socical_comment_list" /></p>
+<ul>
+<li>由于我们发送评论还提供了同步分享到各个微博的功能。你可以设置评论并分享到微博的内嵌文字和图片，此文字出现在微博正文之后以<code>//</code>分隔,例如下面的设置，用户发送了“评论内容”并分享到微博之后效果是“评论内容//评论内嵌文字"</li>
+</ul>
+<pre><code>[UMSocialData defaultData].commentText = @&quot;评论内嵌文字&quot;;
+[UMSocialData defaultData].commentImage = [UIImage imageNamed:@&quot;icon.png&quot;];
+</code></pre>
+
+<h2>4 <a name="advance_use" id="advance_use" style="color:black">进阶使用</a></h2>
+<p>如果上述文档不能满足你的需求，请移步至“详细集成文档”。</p>

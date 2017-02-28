@@ -1,0 +1,94 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>喜欢 集成指南</h1>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#umeng_social">产品概述</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#quick_use">下载并安装SDK</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#add_code">集成代码</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#error_code">常见错误代码含义</a></li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="umeng_social" id="umeng_social" style="color:black"> 产品概述</a></h2>
+<p>通过喜欢组件，用户可以在应用中喜欢一篇文章，一首歌曲等内容。喜欢组件会增强用户和应用的交互频率，提高用户的活跃率和留存率。</p>
+<h2>2 <a name="quick_use" id="quick_use" style="color:black">下载并安装SDK</a></h2>
+<h3>Step1</h3>
+<p>下载 <a href="http://dev.umeng.com/social/ios/sdk-download" style="text-decoration:none" target="_blank">最新版SDK</a></p>
+<h3>Step2</h3>
+<p>确认你使用的XCode版本在4.4以上，工程的Base SDK和iOS Deployment Target在iOS4.3以上</p>
+<h3>Step3</h3>
+<p>解压SDK压缩包，将其中形如UMSocial_Sdk_x.x.x的文件夹拖入工程目录：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_drag_sdk.png" title="drag_sdk" /> </p>
+<h3>Step4</h3>
+<p>确认勾选了“Copy items to destination's group folder”选项，并选择你要添加到的Target: </p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_check_tip.png" title="check_tip" /> </p>
+<p>现在应该是这样的效果：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_project_structure.png" title="project_structure" /> </p>
+<h2>3 <a name="add_code" id="add_code" style="color:black">集成代码 </a></h2>
+<h3>设置友盟Appkey</h3>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [UMSocialData setAppKey:@&quot;507fcab25270157b37000010&quot;];
+}
+</code></pre>
+
+<h3>发送喜欢</h3>
+<p>设置喜欢内容，比如一篇文章的标题、一首歌的名字等。</p>
+<pre><code>//把你的文章或者音乐的标识，作为@&quot;identifier&quot;
+UMSocialData *socialData = [[UMSocialData alloc] initWithIdentifier:@&quot;identifier&quot;];
+UMSocialDataService *socialDataService = [[UMSocialDataService alloc] initWithUMSocialData:socialData];
+</code></pre>
+
+<p>发送一个喜欢的请求，或者如果已经喜欢过的话，发送取消喜欢的请求。</p>
+<pre><code>[socialDataService postAddLikeOrCancelWithCompletion:^(UMSocialResponseEntity *response){
+//获取请求结果
+        NSLog(@&quot;resposne is %@&quot;,response);
+    }];
+</code></pre>
+
+<p>判断是否已经喜欢</p>
+<pre><code>BOOL isLike = socialData.isLike;
+</code></pre>
+
+<ul>
+<li>从线上获取喜欢数</li>
+</ul>
+<pre><code>//socialDataService为设置评论内容中初始化的对象    
+    [socialDataService requestSocialDataWithCompletion:^(UMSocialResponseEntity *response){
+// 下面的方法可以获取保存在本地的评论数，如果app重新安装之后，数据会被清空，可能获取值为0
+        int likeNumber = [socialDataService.socialData getNumber:UMSNumberLike];
+        NSLog(@&quot;likeNum is %d&quot;,likeNumber);
+    }];
+</code></pre>
+
+<h2>4 <a name="error_code" id="error_code" style="color:black">常见错误代码含义 </a></h2>
+<table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>错误原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>516</td>
+<td>请求喜欢失败</td>
+</tr>
+</tbody>
+</table>

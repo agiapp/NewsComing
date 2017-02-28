@@ -1,0 +1,87 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>登录 快速集成</h1>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#umeng_social">产品概述</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#quick_use">下载并安装SDK</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#add_code">集成代码</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#advanced_use">进阶使用</a></li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="umeng_social" id="umeng_social" style="color:black"> 产品概述</a></h2>
+<p>通过登录控件，用户可以指定社交平台账号作为应用内账号，您可以获取此账号信息来识别用户身份，例如在界面中显示用户头像和昵称等信息。登录组件利用社交平台简化了用户的登录过程，也为用户身份识别提供了更通用的方法。</p>
+<h2>2 <a name="quick_use" id="quick_use" style="color:black">下载并安装SDK</a></h2>
+<h3>Step1</h3>
+<p>下载 <a href="http://dev.umeng.com/social/ios/sdk-download" style="text-decoration:none" target="_blank">最新版SDK</a></p>
+<h3>Step2</h3>
+<p>确认你使用的XCode版本在4.4以上，工程的Base SDK和iOS Deployment Target在iOS4.3以上</p>
+<h3>Step3</h3>
+<p>解压SDK压缩包，将其中形如UMSocial_Sdk_x.x.x的文件夹拖入工程目录：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_drag_sdk.png" title="drag_sdk" /> </p>
+<h3>Step4</h3>
+<p>确认勾选了“Copy items to destination's group folder”选项，并选择你要添加到的Target: </p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_check_tip.png" title="check_tip" /> </p>
+<p>现在应该是这样的效果：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_project_structure.png" title="project_structure" /> </p>
+<h2>3 <a name="add_code" id="add_code" style="color:black">集成代码</a></h2>
+<h3>设置友盟Appkey</h3>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [UMSocialData setAppKey:@&quot;507fcab25270157b37000010&quot;];
+}
+</code></pre>
+
+<h3>打开各个微博平台的授权页面</h3>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+//`snsName` 代表各个支持云端分享的平台名，有`UMShareToSina`,`UMShareToTencent`等五个。    
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response)
+    {
+        NSLog(@&quot;response is %@&quot;,response);
+    });
+</code></pre>
+
+<p>授权之后获取各个微博账号数据，可以在上面的回调Block方法内实现下面的代码，</p>
+<pre><code>{
+    //如果是授权到新浪微博，SSO之后如果想获取用户的昵称、头像等需要再次获取一次账户信息
+    if ([platformName isEqualToString:UMShareToSina]) {
+        [[UMSocialDataService defaultDataService] requestSocialAccountWithCompletion:^(UMSocialResponseEntity *accountResponse){
+            NSLog(@&quot;SinaWeibo's user name is %@&quot;,[[[accountResponse.data objectForKey:@&quot;accounts&quot;] objectForKey:UMShareToSina] objectForKey:@&quot;username&quot;]);
+        }];
+    }
+
+    //这里可以获取到腾讯微博openid,Qzone的token等
+    /*
+    else if ([platformName isEqualToString:UMShareToTencent]) {
+        [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToTencent completion:^(UMSocialResponseEntity *respose){
+            NSLog(@&quot;get openid  response is %@&quot;,respose);
+        }];
+    }
+     */
+}
+</code></pre>
+
+<p>这个方法是强制弹出授权，你可以根据已经授权情况来判断是否调用，，例如有没有授权到新浪微博</p>
+<pre><code>BOOL isOauth = [UMSocialAccountManager isOauthWithPlatform:UMShareToSina];
+</code></pre>
+
+<h2>4 <a name="advanced_use" id="advanced_use" style="color:black">进阶使用</a></h2>
+<p>如果上述文档不能满足你的需求，请移步至“详细集成文档”。</p>

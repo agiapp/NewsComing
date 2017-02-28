@@ -1,0 +1,92 @@
+//
+//  PrefixHeader.pch
+//  MyBaseProject
+//
+//  Created by 任波 on 16/3/2.
+//  Copyright © 2016年 renbo. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+//对MBProgresshud的封装
+#import "NSObject+Hint.h"
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+
+@import AVKit;
+@import AVFoundation;
+
+//存放全局宏定义
+#import "Const.h"
+
+#import "BarItem.h"
+
+//按比例放大、充满 当前视图减掉超出自身区域的图片部分
+#import "MyImageView.h"
+
+//Github排名第一的第三方网络请求类库，封装了系统的NSURLSession+NSOperation
+#import <AFNetworking.h>
+//对UIKit类添加类拓展，让UIImageView、UIButton等拥有了网络加载图片的功能
+#import <UIKit+AFNetworking.h>
+
+//改变系统的target+selector模式为 block模式,带来紧凑的代码风格，高效率的回调执行
+#import <BlocksKit.h>
+#import <BlocksKit+MessageUI.h>
+#import <BlocksKit+UIKit.h>
+
+//优秀的滚动视图头部和脚步刷新效果
+#import <MJRefresh.h>
+//优秀的Json解析类库
+#import <MJExtension.h>
+
+//第三方对数据库的操作类库，是对系统Sqlite3的封装；使用SQL语句操作数据库
+#import <FMDB/FMDB.h>
+
+
+//优秀的替换NSLog的第三方，更加省资源
+#import <CocoaLumberjack.h>
+#ifdef DEBUG
+static const int ddLogLevel = DDLogLevelVerbose;
+#else
+static const int ddLogLevel = DDLogLevelError;
+#endif
+
+//实现安卓toast风格提示，弹出提示框架
+#import <MBProgressHUD.h>
+
+//纯代码书写AutoLayout的第三方类库（链式语法）
+#import <Masonry.h>
+
+//闪光效果
+#import <FBShimmeringView.h>
+#import <FBShimmeringLayer.h>
+
+//扁平化风格
+#import <FlatUIKit.h>
+
+//QQ的左侧菜单风格
+#import <RESideMenu.h>
+
+//Cell滑动，出现多个功能按钮
+#import <SWTableViewCell.h>
+
+//图片浏览器
+//#import <MWPhotoBrowser.h>
+
+//最低只需传两个数组即可完成tabBar搭建
+#import <CYLTabBarController.h>
+
+#import <BmobSDK/Bmob.h>
+//注册及登录
+#import <BmobSDK/BmobUser.h>
+
+//友盟
+#import "UMSocial.h"
+
+//方便形成如同网易新闻首页，控制器滑动翻页效果的控制器
+#import <WMPageController.h>
+
+#endif /* PrefixHeader_pch */

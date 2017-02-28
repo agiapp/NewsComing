@@ -1,0 +1,112 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>评论 详细集成</h1>
+<p><font color="red">注意：本文示例代码均针对最新版SDK，如果你所用SDK的类名或方法名与此文不符合，请使用你所用SDK的随包文档、或者下载使用最新版SDK。</font></p>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#comment_UI">评论界面方法</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#comment_data">评论数据方法</a> </li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="comment_UI" id="comment_UI" style="color:black"> 评论界面方法</a></h2>
+<ul>
+<li>设置评论内容
+   评论内容比如是一篇文章的标题、一首歌的名字等。</li>
+</ul>
+<pre><code>//把你的文章或者音乐的标识，作为@&quot;identifier&quot;
+UMSocialData *socialData = [[UMSocialData alloc] initWithIdentifier:@&quot;identifier&quot;];
+UMSocialControllerServiceComment *socialControllerService = [[UMSocialControllerServiceComment alloc] initWithUMSocialData:socialData];
+</code></pre>
+
+<ul>
+<li>得到一个评论列表</li>
+</ul>
+<pre><code>UINavigationController *commentList = [socialControllerService getSocialCommentListController];
+[self presentModalViewController:commentList animated:YES];
+</code></pre>
+
+<p><img alt="socialbar" src="http://dev.umeng.com/images/ios/social_commentlist.png" title="socical_comment_list" /></p>
+<ul>
+<li>由于我们发送评论还提供了同步分享到各个微博的功能。你可以设置评论并分享到微博的内嵌文字和图片，此文字出现在微博正文之后以<code>//</code>分隔,例如下面的设置，用户发送了“评论内容”并分享到微博之后效果是“评论内容//评论内嵌文字"</li>
+</ul>
+<pre><code>socialData.commentText = @&quot;评论内嵌文字&quot;;
+socialData.commentImage = [UIImage imageNamed:@&quot;icon.png&quot;];
+</code></pre>
+
+<h2>2 <a name="comment_data" id="comment_data" style="color:black"> 评论数据方法</a></h2>
+<ul>
+<li>设置评论内容
+   评论内容比如是一篇文章的标题、一首歌的名字等。</li>
+</ul>
+<pre><code>//把你的文章或者音乐的标识，作为@&quot;identifier&quot;
+UMSocialData *socialData = [[UMSocialData alloc] initWithIdentifier:@&quot;identifier&quot;];
+UMSocialDataService *socialDataService = [[UMSocialDataService alloc] initWithUMSocialData:socialData];
+//如果不区分评论内容的话可以用默认初始化方法
+//UMSocialDataService *socialDataService = [UMSocialDataService defaultDataService];
+</code></pre>
+
+<ul>
+<li>获取最新10条评论：</li>
+</ul>
+<pre><code>//如果评论数据比较多，想获取之前的评论，可以在`lastCommentTime`中传入指定时间戳。传入评论数据在回调Block对象形参response里的属性`data`中得到
+//socialDataService为设置评论内容中初始化的对象
+[socialDataService requestCommentList:(-1) completion:^(UMSocialResponseEntity *response){
+            NSLog(@&quot;comment data is %@&quot;,response.data);
+        }];
+</code></pre>
+
+<ul>
+<li>添加一条文本评论：</li>
+</ul>
+<pre><code>//socialDataService为设置评论内容中初始化的对象
+[socialDataService postCommentWithContent:@&quot;comment text&quot; completion:^(UMSocialResponseEntity *response){
+   NSLog(@&quot;comment result is %@&quot;,response);
+        }];
+</code></pre>
+
+<ul>
+<li>添加一条评论，并添加地理位置信息，或者分享到微博平台，可以带有图片</li>
+</ul>
+<pre><code>//socialDataService为设置评论内容中初始化的对象
+[socialDataService postCommentWithContent:@&quot;评论内容&quot; image:nil templateText:@&quot;评论并分享到微博后面带的内容&quot; location:nil shareToSNSWithUsid:nil completion:nil];
+//如果要评论并分享到微博需要形如下面的微博平台名和微博用户usid组成的NSDictionary，传入到上面的shareToSNSWithUsid:参数中
+//NSString *usid = [[[UMSocialAccountManager socialAccountDictionary] valueForKey:UMShareToSina] usid];  //得到已经授权的usid，可以把UMShareToSina替换为代表其他平台的字符串   
+//NSDictionary *shareToSNS = [NSDictionary dictionaryWithObjectsAndKeys:usid,UMShareToSina,nil];
+</code></pre>
+
+<ul>
+<li>从线上获取评论数</li>
+</ul>
+<pre><code>//socialDataService为设置评论内容中初始化的对象    
+    [socialDataService requestSocialDataWithCompletion:^(UMSocialResponseEntity *response){
+// 下面的方法可以获取保存在本地的评论数，如果app重新安装之后，数据会被清空，可能获取值为0
+        int commentNumber = [socialDataService.socialData getNumber:UMSNumberComment];
+        NSLog(@&quot;commentNum is %d&quot;,commentNumber);
+    }];
+</code></pre>
+
+<h3>常见错误代码含义</h3>
+<table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>错误原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>503</td>
+<td>评论失败</td>
+</tr>
+<tr>
+<td>504</td>
+<td>获取评论失败</td>
+</tr>
+</tbody>
+</table>

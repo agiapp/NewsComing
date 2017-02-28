@@ -1,0 +1,172 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>登录 详细集成</h1>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#umeng_oauthinfo">授权信息页面</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#umeng_account">个人中心页面</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#umeng_oauth">授权页面</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#userInfo">用户账户相关接口</a></li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="umeng_oauthinfo" id="umeng_oauthinfo" style="color:black"> 授权信息页面</a></h2>
+<p>显示各个微博平台的授权情况。用户可以新增、更改、删除授权账号。</p>
+<pre><code>UINavigationController *accountViewController =[[UMSocialControllerServiceComment defaultControllerService] getSnsAccountController];
+[self presentModalViewController:accountViewController animated:YES];
+</code></pre>
+
+<p><img alt="socialbar" src="http://dev.umeng.com/images/ios/social_user_oauth.png" title="socical_user_oauth" /></p>
+<h2>2 <a name="umeng_account" id="umeng_account" style="color:black"> 个人中心页面</a></h2>
+<p>上面是绑定一个微博账号作为SDK的登录账号，简称为登录账号，下面是各个已经授权的微博账号，包括我们支持的所有平台，可以对各个平台进行授权和解除授权。</p>
+<pre><code>UINavigationController *accountViewController =[[UMSocialControllerServiceComment defaultControllerService] getSocialAccountController];
+[self presentModalViewController:accountViewController animated:YES];
+</code></pre>
+
+<p><img alt="socialbar" src="http://dev.umeng.com/images/ios/social_user_account.png" title="socical_user_account" /></p>
+<h2>3 <a name="umeng_oauth" id="umeng_oauth" style="color:black"> 授权页面（界面级接口）</a></h2>
+<h3><strong>SSO授权</strong></h3>
+<p>SSO授权即如果用户设备安装了新浪微博客户端，就会跳转到那里进行授权，好处是用户不需要输入用户名和密码，如果没有安装新浪微博客户端的话还会使用webview授权，参看登录快速集成文档对Xcode的设置。下面是用SSO授权到新浪微博：</p>
+<pre><code>//`snsName` 代表各个支持云端分享的平台名，有`UMShareToSina`,`UMShareToTencent`等五个。    
+  UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToSina];
+  snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+      NSLog(@&quot;response is %@&quot;,response);
+  });
+</code></pre>
+
+<p>这个方法是强制弹出授权，你可以根据已经授权情况来判断是否调用，例如有没有授权到新浪微博</p>
+<pre><code>BOOL isOauth = [UMSocialAccountManager isOauthAndTokenNotExpired:UMShareToSina];
+</code></pre>
+
+<h3><strong>网页授权</strong></h3>
+<p>获得一个授权网页，同样需要加上上面的判断是否已授权。</p>
+<pre><code>UINavigationController *oauthController = [[UMSocialControllerService defaultControllerService] getSocialOauthController:UMShareToSina];
+[self presentModalViewController:oauthController animated:YES];
+</code></pre>
+
+<p><img alt="socialbar" src="http://dev.umeng.com/images/ios/social_oauth.png" title="socical_oauth" /></p>
+<ul>
+<li>授权完成的回调函数</li>
+</ul>
+<pre><code>[UMSocialControllerService defaultControllerService].socialUIDelegate = self;      //设置回调对象
+//实现回调方法
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+    if (response.viewControllerType == UMSViewControllerOauth) {
+        ……
+        NSLog(@&quot;didFinishOauthAndGetAccount response is %@&quot;,response);
+    }
+}
+</code></pre>
+
+<h2>4 <a name="userInfo" id="userInfo" style="color:black"> 用户账户相关接口</a></h2>
+<ul>
+<li>获取用户微博账号信息（数据级的接口）</li>
+</ul>
+<p>使用本SDK对个微博平台授权过后，我们提供方法查询用户授权到各个微博平台的信息，例如想获取新浪微博用户的昵称和头像可以用下面的代码。</p>
+<pre><code>NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];
+UMSocialAccountEntity *sinaAccount = [snsAccountDic valueForKey:UMShareToSina];
+UMLog(@&quot;sina nickName is %@, iconURL is %@&quot;,sinaAccount.userName,sinaAccount.iconURL);
+</code></pre>
+
+<ul>
+<li>判断是否授权到某个微博平台，并且Token没有过期，例如有没有授权到新浪微博</li>
+</ul>
+<pre><code>[UMSocialAccountManager isOauthAndTokenNotExpired:UMShareToSina];
+</code></pre>
+
+<ul>
+<li>
+<p>授权某个平台，如上面界面级接口部分。</p>
+</li>
+<li>
+<p>解除授权,如果想获取解除授权结果同样在completion的回调对象中的形参<code>response</code>中得到。下面是解除绑定新浪微博的代码：</p>
+</li>
+</ul>
+<pre><code>[[UMSocialDataService defaultDataService] requestUnOauthWithType:UMShareToSina  completion:^(UMSocialResponseEntity *response){
+            NSLog(@&quot;response is %@&quot;,response);
+        }];
+</code></pre>
+
+<ul>
+<li>实时判断Token是否有效，从各个开放平台获取结果</li>
+</ul>
+<pre><code>//判断新浪微博账号的token是否有效
+    [[UMSocialDataService defaultDataService] requestIsTokenValid:@[UMShareToSina] completion:^(UMSocialResponseEntity *response) {
+        NSLog(@&quot;is token valid is %@&quot;,[response.data.allValues objectAtIndex:0]);
+    }];
+</code></pre>
+
+<ul>
+<li>获取用户微博账号详细信息.</li>
+</ul>
+<pre><code>//包括各平台的uid和accestoken，各个平台不一样，腾讯微博有openid。得到的数据在回调Block对象形参respone的data属性。    
+[[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToTencent  completion:^(UMSocialResponseEntity *response){
+            NSLog(@&quot;SnsInformation is %@&quot;,response.data);
+        }];
+</code></pre>
+
+<ul>
+<li>获取用户好友列表，支持新浪微博、腾讯微博、人人网。得到的数据在回调Block对象形参<code>respone</code>的<code>data</code>属性。</li>
+</ul>
+<pre><code>[[UMSocialDataService defaultDataService] requestSnsFriends:UMShareToTencent  completion:^(UMSocialResponseEntity *response){
+            NSLog(@&quot;SnsFriends is %@&quot;,response.data);
+        }];
+</code></pre>
+
+<ul>
+<li>添加关注，支持新浪微博、腾讯微博，可以同时传多个关注微博账号</li>
+</ul>
+<pre><code>[[UMSocialDataService defaultDataService] requestAddFollow:UMShareToSina followedUsid:@[@&quot;2937537507&quot;] completion:nil];
+</code></pre>
+
+<ul>
+<li>判断是否已经登录友盟账号。所谓友盟账号，即我们将绑定一个微博平台的账号作为友盟账号，用户使用SDK的评论功能和个人中心时使用友盟账号的昵称和头像。</li>
+</ul>
+<pre><code>[UMSocialAccountManager isLoginWithSnsAccount];
+</code></pre>
+
+<ul>
+<li>登录友盟账号，选择登录的平台一定为已经授权的微博平台，否则无法正常登录。下面是选择新浪微博作为友盟账号。</li>
+</ul>
+<pre><code>[[UMSocialDataService defaultDataService] requestBindToSnsWithType:UMShareToSina completion:nil];
+</code></pre>
+
+<ul>
+<li>注销友盟账号。</li>
+</ul>
+<pre><code>[[UMSocialDataService defaultDataService] requestUnBindToSnsWithCompletion:nil];
+</code></pre>
+
+<h3>常见错误代码含义</h3>
+<table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>错误原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>503</td>
+<td>评论失败</td>
+</tr>
+<tr>
+<td>504</td>
+<td>获取评论失败</td>
+</tr>
+</tbody>
+</table>

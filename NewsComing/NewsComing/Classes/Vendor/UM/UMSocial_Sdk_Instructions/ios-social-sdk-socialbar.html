@@ -1,0 +1,214 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>操作栏 集成指南</h1>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#umeng_social">产品概述</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#quick_use">下载并安装SDK</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#add_code">集成代码</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#error_code">常见错误代码含义</a></li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="umeng_social" id="umeng_social" style="color:black"> 产品概述</a></h2>
+<p>通过社会化操作栏，您可以快速整合评论，分享，喜欢，登录等组件。社会化操作栏会增强用户和应用的交互频率，提高用户的活跃率和留存率。</p>
+<h2>2 <a name="quick_use" id="quick_use" style="color:black">下载并安装SDK</a></h2>
+<h3>Step1</h3>
+<p>下载 <a href="http://dev.umeng.com/sdkdownload/sdkdownload_ios_social.html" style="text-decoration:none" target="_blank">最新版SDK</a></p>
+<h3>Step2</h3>
+<p>确认你使用的XCode版本在4.4以上，工程的Base SDK和iOS Deployment Target在iOS4.3以上</p>
+<h3>Step3</h3>
+<p>解压SDK压缩包，将其中形如UMSocial_Sdk_x.x.x的文件夹拖入工程目录：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_drag_sdk.png" title="drag_sdk" /> </p>
+<h3>Step4</h3>
+<p>确认勾选了“Copy items to destination's group folder”选项，并选择你要添加到的Target: </p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_check_tip.png" title="check_tip" /> </p>
+<p>现在应该是这样的效果：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_project_structure.png" title="project_structure" /> </p>
+<h2>3 <a name="add_code" id="add_code" style="color:black">集成代码 </a></h2>
+<h3>设置友盟Appkey</h3>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [UMSocialData setAppKey:@&quot;507fcab25270157b37000010&quot;];
+}
+</code></pre>
+
+<h3>社会化操作栏</h3>
+<p>使用社会化操作栏非常简单——实例化一个“社会化操作服务”，并将其“社会化操作栏”变量添加到您的视图控制器中即可。代码如下：</p>
+<pre><code>  - (void)viewDidLoad{
+    [super viewDidLoad];
+    //设置分享内容，例如一本书的标题、一首歌的歌名
+    UMSocialData *socialData = [[UMSocialData alloc] initWithIdentifier:@&quot;title&quot;];    
+    UMSocialBar  *socialBar = [[UMSocialBar alloc] initWithUMSocialData:socialData withViewController:self];
+    socialBar.center = CGPointMake(160, 390);
+    [self.view addSubview:socialBar];
+}  
+</code></pre>
+
+<p><img alt="socialbar" src="http://dev.umeng.com/images/ios/socialBar_white.png" title="socialbar" /></p>
+<p>这是个放置在APP底部的通用工具栏，它为用户提供了针对特定内容页的一站式社会化功能（评论、喜欢、分享、个人中心4个功能）。</p>
+<h2>4 <a name="error_code" id="error_code" style="color:black">常见错误代码含义 </a></h2>
+<table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>错误原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>500</td>
+<td>给定uid的用户并不存在</td>
+</tr>
+<tr>
+<td>501</td>
+<td>绑定账户失败</td>
+</tr>
+<tr>
+<td>502</td>
+<td>解绑定失败</td>
+</tr>
+<tr>
+<td>503</td>
+<td>评论失败</td>
+</tr>
+<tr>
+<td>504</td>
+<td>获取评论失败</td>
+</tr>
+<tr>
+<td>505</td>
+<td>用户被加入黑名单</td>
+</tr>
+<tr>
+<td>506</td>
+<td>获取好友失败</td>
+</tr>
+<tr>
+<td>507</td>
+<td>获取授权url失败</td>
+</tr>
+<tr>
+<td>508</td>
+<td>解除授权失败</td>
+</tr>
+<tr>
+<td>510</td>
+<td>分享失败</td>
+</tr>
+<tr>
+<td>511</td>
+<td>获取bar失败</td>
+</tr>
+<tr>
+<td>512</td>
+<td>从平台获取用户信息失败</td>
+</tr>
+<tr>
+<td>513</td>
+<td>url跳转失败</td>
+</tr>
+<tr>
+<td>514</td>
+<td>从social获取用户信息失败</td>
+</tr>
+<tr>
+<td>515</td>
+<td>请求的参数错误</td>
+</tr>
+<tr>
+<td>516</td>
+<td>请求喜欢失败</td>
+</tr>
+<tr>
+<td>517</td>
+<td>版本号错误</td>
+</tr>
+</tbody>
+</table>
+<h3>分享错误代码</h3>
+<table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>错误原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5001</td>
+<td>错误的友盟appkey，或者此appkey没有绑定任何平台.如果开发者绑定了，依然出现这个问题，让开发者再试一下，可能是刚绑定马上就测试的原因，最好等2分钟。</td>
+</tr>
+<tr>
+<td>5002</td>
+<td>这个友盟appkey已经被禁止</td>
+</tr>
+<tr>
+<td>5003</td>
+<td>请求的参数中没有uid</td>
+</tr>
+<tr>
+<td>5004</td>
+<td>未知的错误，具体的错误信息会在log的输出中</td>
+</tr>
+<tr>
+<td>5005</td>
+<td>访问频率超限，可一会儿再试</td>
+</tr>
+<tr>
+<td>5006</td>
+<td>请求参数中没有content字段</td>
+</tr>
+<tr>
+<td>5007</td>
+<td>请求参数中content字段的内容为空</td>
+</tr>
+<tr>
+<td>5008</td>
+<td>没有上传图片</td>
+</tr>
+<tr>
+<td>5009</td>
+<td>此友盟的appkey没有绑定对应平台的appkey和appsecret</td>
+</tr>
+<tr>
+<td>5010</td>
+<td>userid无效，这个用户并没有进行授权</td>
+</tr>
+<tr>
+<td>5013</td>
+<td>请求的参数中没有appkey这个字段</td>
+</tr>
+<tr>
+<td>5014</td>
+<td>没有对此用户进行授权</td>
+</tr>
+<tr>
+<td>5024</td>
+<td>获取access token失败，具体看log输出</td>
+</tr>
+<tr>
+<td>5025</td>
+<td>获取request token失败，具体看log输出</td>
+</tr>
+<tr>
+<td>5027</td>
+<td>授权已经过期</td>
+</tr>
+</tbody>
+</table>

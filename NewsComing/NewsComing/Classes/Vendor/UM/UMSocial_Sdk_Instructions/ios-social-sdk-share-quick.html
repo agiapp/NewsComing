@@ -1,0 +1,206 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><link rel="stylesheet" type="text/css" href="markdown.css"></link></head><body>
+</body></html><h1>分享 快速集成</h1>
+<p><input name="pinList" type="hidden" value="1"/></p>
+<ul>
+<li>
+<ol>
+<li><a href="#umeng_social">产品概述</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#sign_in_umengkey">获取友盟Appkey</a> </li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#quick_use">下载并安装SDK</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#check_result">验证效果</a></li>
+</ol>
+</li>
+<li>
+<ol>
+<li><a href="#advance_use">进阶使用</a></li>
+</ol>
+</li>
+</ul>
+<h2>1 <a name="umeng_social" id="umeng_social" style="color:black"> 产品概述</a></h2>
+<p>友盟社会化组件，可以让移动应用快速具备社会化分享、登录、评论、喜欢等功能，并提供实时、全面的社会化数据统计分析服务。</p>
+<p><strong>指南将会手把手教你使用社会化组件SDK，用10分钟为APP增加新浪微博、腾讯微博、人人网分享功能。</strong></p>
+<p><font color="red">注意：1. 本文示例代码均针对最新版SDK，如果你所用SDK的类名或方法名与此文不符合，请使用你所用SDK的随包文档、或者下载使用最新版SDK。<br />
+2. 使用QQ分享登陆功能，只支持32位SDK，需要把Xcode工程的Architectures修改为<strong>$(ARCHS_STANDARD_32_BIT)</strong>
+</font></p>
+<h2>2 <a name="sign_in_umengkey" id="sign_in_umengkey" style="color:black"> 获取友盟Appkey</a></h2>
+<ul>
+<li>
+<p>如果你之前已经在友盟注册了应用，并获取到了Appkey，可以继续使用它。   </p>
+</li>
+<li>
+<p>如果你尚未在友盟注册开发者账号，需要先<a href="http://www.umeng.com/users/sign_up" style="text-decoration:none" target="_blank">注册</a>，注册之后登录你的账号，点击<strong>添加新应用</strong>，填写完应用基本信息后，将进入"下载SDK并添加代码"页面，此页面即可得到<code>Appkey</code>。</p>
+</li>
+</ul>
+<h2>3 <a name="quick_use" id="quick_use" style="color:black">下载并安装SDK</a></h2>
+<h3>Step1 下载SDK</h3>
+<p>下载 <a href="http://dev.umeng.com/social/ios/sdk-download" style="text-decoration:none" target="_blank">最新版SDK</a></p>
+<h3>Step2 加入SDK</h3>
+<p>解压SDK压缩包，将形如UMSocial_Sdk_x.x.x的文件夹拖入工程目录：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_drag_sdk.png" title="drag_sdk" /> </p>
+<p>确认勾选了“Copy items to destination's group folder”选项，并选择你要添加到的Target: </p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_check_tip.png" title="check_tip" /> </p>
+<p>现在应该是这样的效果：</p>
+<p><img alt="alt text" src="http://dev.umeng.com/images/ios/social_project_structure.png" title="project_structure" /> </p>
+<p>UMSocial_Sdk_x.x.x 文件夹的目录结构</p>
+<table>
+<thead>
+<tr>
+<th>文件或文件夹</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>libUMSocial_Sdk_x.x.x.a, libUMSocial_Sdk_Comment_3.0.a</td>
+<td>库文件</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>头文件</td>
+</tr>
+<tr>
+<td>SocialSDKXib</td>
+<td>xib文件</td>
+</tr>
+<tr>
+<td>en.lproj，zh-Hans.lproj</td>
+<td>英文和中文语言文件</td>
+</tr>
+<tr>
+<td>frameworks</td>
+<td>使用的第三方SDK，里面的Wechat 代表微信SDK</td>
+</tr>
+</tbody>
+</table>
+<p>UMSocial_Sdk_Extra_Frameworks 文件夹的目录结构</p>
+<table>
+<thead>
+<tr>
+<th>文件或文件夹</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TencentOpenAPI</td>
+<td>QQ互联SDK</td>
+</tr>
+<tr>
+<td>Facebook</td>
+<td>Facebook SDK</td>
+</tr>
+<tr>
+<td>LaiWang</td>
+<td>来往 SDK</td>
+</tr>
+<tr>
+<td>UMSocialYiXin.framework</td>
+<td>易信 SDK</td>
+</tr>
+<tr>
+<td>UMSocial_ScreenShot_Sdk</td>
+<td>截屏 SDK</td>
+</tr>
+<tr>
+<td>UMSocial_Shake_Sdk</td>
+<td>摇一摇 SDK</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：<br />
+1. 若你的工程设置了all_load，需要添加手机QQ SDK需要的系统framework:Security.framework,libiconv.dylib,SystemConfiguration.framework,CoreGraphics.framework，libsqlite3.dylib，CoreTelephony.framework,libstdc++.dylib,libz.dylib。详情请参考<a http://dev.umeng.com/social/ios/share/specific-integration#binding_config" style="text-decoration:none">SSO（免登录）和新平台的设置</a>  </p>
+</blockquote>
+<h3>Step3 设置AppKey</h3>
+<p>在AppDelegate内设置友盟AppKey</p>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [UMSocialData setAppKey:@&quot;507fcab25270157b37000010&quot;];
+}
+</code></pre>
+
+<h3>Step4 添加实现代码</h3>
+<p>打开需要集成分享功能的视图源码<code>UIViewController.m</code>，把如下代码复制并粘贴到你将弹出一个分享列表的位置，例如到响应分享按钮的方法中。并且修改下面的友盟appkey，你要分享的文字、图片，你要分享到的微博平台，例如下面写的是新浪微博、腾讯微博、人人网。</p>
+<pre><code>#import &quot;UMSocial.h&quot;
+……
+//注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
+[UMSocialSnsService presentSnsIconSheetView:self
+                                     appKey:@&quot;507fcab25270157b37000010&quot;
+                                  shareText:@&quot;你要分享的文字&quot;
+                                 shareImage:[UIImage imageNamed:@&quot;icon.png&quot;]
+                            shareToSnsNames:[NSArray arrayWithObjects:UMShareToSina,UMShareToTencent,UMShareToRenren,nil]
+                                   delegate:nil]; 
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>形参名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>controller</td>
+<td>分享列表页面所在的UIViewController对象</td>
+</tr>
+<tr>
+<td>appKey</td>
+<td>友盟appKey，如果你在其他地方用<code>UMSocialData</code>设置了appKey，这里也可以传nil</td>
+</tr>
+<tr>
+<td>shareText</td>
+<td>分享编辑页面的内嵌文字</td>
+</tr>
+<tr>
+<td>shareImage</td>
+<td>分享编辑页面的内嵌图片，用户可以在编辑页面中删除。如果你不需要分享图片，可以传入<code>nil</code></td>
+</tr>
+<tr>
+<td>shareToSnsNames</td>
+<td>定义列表出现的微博平台字符串构成的数组，字符变量名为UMShareToSina、UMShareToTencent、UMShareToWechatSession、UMShareToWechatTimeline、UMShareToQzone、UMShareToQQ、UMShareToRenren、UMShareToDouban、UMShareToEmail、UMShareToSms、UMShareToFacebook、UMShareToTwitter，分别代表新浪微博、腾讯微博、微信好友、微信朋友圈、QQ空间、手机QQ、人人网、豆瓣、电子邮箱、短信、Facebook、Twitter</td>
+</tr>
+<tr>
+<td>delegate</td>
+<td>实现分享状态回调方法的对象，回调方法的实现可以参见分享详细说明的回调方法部分。如果你不需要回调的话，可以设为<code>nil</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>注意：<br />
+1 . 集成<font color="red">微信</font>和<font color="red">手机QQ</font>，请参考<a http://dev.umeng.com/social/ios/share/specific-integration#binding_config" style="text-decoration:none">SSO（免登录）和新平台的设置</a> <br />
+2 . 弹出横屏页面必须要先使用如下设置屏幕方向的代码，再弹出分享列表页面：<br />
+<code>[UMSocialConfig setSupportedInterfaceOrientations:UIInterfaceOrientationMaskLandscape];</code></p>
+</blockquote>
+<h2>4 <a name="check_result" id="check_result" style="color:black">验证效果</a></h2>
+<p>编译并运行后，弹出类似下图的分享列表选择页面，点击某个平台进行授权之后可以进入微博编辑页面，并可以发送微博，说明你已经基本集成成功了。但是，为了使您的用户有更好的分享体验，以及您的应用有更多的分享量，更好地在社交平台上传播，我们建议您按照详细集成文档的指引进行<a href="http://dev.umeng.com/social/ios/share/specific-integration#binding_config" style="text-decoration:none">SSO（免登录）和新平台的设置</a>。</p>
+<table>
+<thead>
+<tr>
+<th><img alt="social" src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTQvMDMvMTIvMTZfMjFfNDBfNTc3X3NvY2lhbF9zaGFyZWxpc3RfYWN0aW9uc2hlZXQucG5nIl1d/social_sharelist_actionsheet.png" title="social_share_list" /></th>
+<th><img alt="social" src="http://dev.umeng.com/system/images/W1siZiIsIjIwMTQvMDMvMTIvMTZfMjFfNDBfMzg2X3NvY2lhbF9zaGFyZWVkaXQucG5nIl1d/social_shareedit.png" title="social_share_list" /></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列表页面</td>
+<td>编辑页面</td>
+</tr>
+</tbody>
+</table>
+<h2>5 <a name="advance_use" id="advance_use" style="color:black">进阶使用</a></h2>
+<p>如果上述文档不能满足你的分享需求，请参看<a href="http://dev.umeng.com/social/ios/share/specific-integration" style="text-decoration:none">详细集成文档</a>。</p>
