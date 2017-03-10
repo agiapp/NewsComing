@@ -805,6 +805,7 @@
 				TargetAttributes = {
 					C5E502A31E63CC7A003F1943 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = BX5E6477CY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1088,6 +1089,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				DEVELOPMENT_TEAM = BX5E6477CY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsComing/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1119,6 +1121,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				DEVELOPMENT_TEAM = BX5E6477CY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsComing/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
