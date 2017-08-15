@@ -5,6 +5,7 @@
 //  Created by 任波 on 15/12/6.
 //  Copyright © 2015年 renbo. All rights reserved.
 //
+// GitHub最新下载地址：https://github.com/borenfocus/NewsComing
 
 #ifndef Const_h
 #define Const_h

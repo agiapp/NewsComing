@@ -5,6 +5,7 @@
 //  Created by 任波 on 16/3/1.
 //  Copyright © 2016年 renbo. All rights reserved.
 //
+// GitHub最新下载地址：https://github.com/borenfocus/NewsComing
 
 #import "AppDelegate.h"
 #import "AppDelegate+DDLog.h"
@@ -16,8 +17,8 @@
 #import "UMSocial.h"
 
 //友盟
-#define kAppKey  @"5632e65ae0f55a556a0013d9"
-#define kURL     @"http://www.umeng.com/social"
+//#define kAppKey  @"5632e65ae0f55a556a0013d9"
+//#define kURL     @"http://www.umeng.com/social"
 
 @interface AppDelegate ()
 
@@ -34,8 +35,8 @@
     
     [self configGlobalUIStyle];
     
-    [UMSocialData setAppKey:kAppKey];
-    [UMSocialWechatHandler setWXAppId:@"wx945b58aef3a271f0" appSecret:@"0ae78dd42761fd9681b04833c79a857b" url:kURL];
+    //[UMSocialData setAppKey:kAppKey];
+    //[UMSocialWechatHandler setWXAppId:@"wx945b58aef3a271f0" appSecret:@"0ae78dd42761fd9681b04833c79a857b" url:kURL];
     
     [Bmob registerWithAppKey:@"160f7c6245ab95cfef879bf663e2fd32"];
     
@@ -100,16 +101,16 @@
     return _tabBarController;
 }
 
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return  [UMSocialSnsService handleOpenURL:url];
-}
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    return  [UMSocialSnsService handleOpenURL:url];
-}
+//- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+//{
+//    return  [UMSocialSnsService handleOpenURL:url];
+//}
+//- (BOOL)application:(UIApplication *)application
+//            openURL:(NSURL *)url
+//  sourceApplication:(NSString *)sourceApplication
+//         annotation:(id)annotation
+//{
+//    return  [UMSocialSnsService handleOpenURL:url];
+//}
 
 @end
