@@ -109,14 +109,15 @@
             make.size.mas_equalTo(CGSizeMake(30, 30));
         }];
         [_shareBtn bk_addEventHandler:^(id sender) {
+            NSLog(@"分享");
             //注意：分享到微信好友、微信朋友圈、微信收藏、QQ空间、QQ好友、来往好友、来往朋友圈、易信好友、易信朋友圈、Facebook、Twitter、Instagram等平台需要参考各自的集成方法
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                        appKey:@"5632e65ae0f55a556a0013d9"
-                                              shareText:@"欢迎使用新闻来了"
-                                             shareImage:[UIImage imageNamed:@"icon.png"]
-                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,
-                                                         UMShareToSina,UMShareToTencent,UMShareToSms,UMShareToEmail,UMShareToRenren,UMShareToDouban,nil]
-                                               delegate:nil];
+//            [UMSocialSnsService presentSnsIconSheetView:self
+//                                        appKey:@"5632e65ae0f55a556a0013d9"
+//                                              shareText:@"欢迎使用新闻来了"
+//                                             shareImage:[UIImage imageNamed:@"icon.png"]
+//                                        shareToSnsNames:[NSArray arrayWithObjects:UMShareToWechatTimeline,UMShareToWechatSession,
+//                                                         UMShareToSina,UMShareToTencent,UMShareToSms,UMShareToEmail,UMShareToRenren,UMShareToDouban,nil]
+//                                               delegate:nil];
         } forControlEvents:UIControlEventTouchUpInside];
     }
     return _shareBtn;

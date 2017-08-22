@@ -43,7 +43,7 @@
 #import <MJExtension.h>
 
 //第三方对数据库的操作类库，是对系统Sqlite3的封装；使用SQL语句操作数据库
-#import <FMDB/FMDB.h>
+//#import <FMDB/FMDB.h>
 
 
 //优秀的替换NSLog的第三方，更加省资源
@@ -61,17 +61,17 @@ static const int ddLogLevel = DDLogLevelError;
 #import <Masonry.h>
 
 //闪光效果
-#import <FBShimmeringView.h>
-#import <FBShimmeringLayer.h>
+//#import <FBShimmeringView.h>
+//#import <FBShimmeringLayer.h>
 
 //扁平化风格
 #import <FlatUIKit.h>
 
 //QQ的左侧菜单风格
-#import <RESideMenu.h>
+//#import <RESideMenu.h>
 
 //Cell滑动，出现多个功能按钮
-#import <SWTableViewCell.h>
+//#import <SWTableViewCell.h>
 
 //图片浏览器
 //#import <MWPhotoBrowser.h>
@@ -84,7 +84,7 @@ static const int ddLogLevel = DDLogLevelError;
 #import <BmobSDK/BmobUser.h>
 
 //友盟
-#import "UMSocial.h"
+//#import "UMSocial.h"
 
 //方便形成如同网易新闻首页，控制器滑动翻页效果的控制器
 #import <WMPageController.h>

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C5ACE59C1F4AA9E60069978B /* placeholder in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE59B1F4AA9E60069978B /* placeholder */; };
+		C5ACE59E1F4AA9F30069978B /* placeholder in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE59D1F4AA9F30069978B /* placeholder */; };
+		C5ACE5A01F4AADEB0069978B /* placeholder in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE59F1F4AADEB0069978B /* placeholder */; };
+		C5ACE5A21F4AADFF0069978B /* placeholder in Resources */ = {isa = PBXBuildFile; fileRef = C5ACE5A11F4AADFF0069978B /* placeholder */; };
 		C5E502A91E63CC7A003F1943 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E502A81E63CC7A003F1943 /* main.m */; };
 		C5E502AC1E63CC7A003F1943 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C5E502AB1E63CC7A003F1943 /* AppDelegate.m */; };
 		C5E502B21E63CC7A003F1943 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5E502B01E63CC7A003F1943 /* Main.storyboard */; };
@@ -89,6 +93,10 @@
 /* Begin PBXFileReference section */
 		3363DA4589CA6BE12754E7FA /* libPods-NewsComing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NewsComing.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6945B975C75C79AE94557329 /* Pods-NewsComing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NewsComing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NewsComing/Pods-NewsComing.debug.xcconfig"; sourceTree = "<group>"; };
+		C5ACE59B1F4AA9E60069978B /* placeholder */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholder; sourceTree = "<group>"; };
+		C5ACE59D1F4AA9F30069978B /* placeholder */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholder; sourceTree = "<group>"; };
+		C5ACE59F1F4AADEB0069978B /* placeholder */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholder; sourceTree = "<group>"; };
+		C5ACE5A11F4AADFF0069978B /* placeholder */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = placeholder; sourceTree = "<group>"; };
 		C5E502A41E63CC7A003F1943 /* NewsComing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewsComing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C5E502A81E63CC7A003F1943 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		C5E502AA1E63CC7A003F1943 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
@@ -427,6 +435,7 @@
 		C5E503CC1E64190E003F1943 /* WordPicModel */ = {
 			isa = PBXGroup;
 			children = (
+				C5ACE59F1F4AADEB0069978B /* placeholder */,
 			);
 			path = WordPicModel;
 			sourceTree = "<group>";
@@ -475,6 +484,7 @@
 		C5E503DB1E64190E003F1943 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				C5ACE59D1F4AA9F30069978B /* placeholder */,
 				C5E502AA1E63CC7A003F1943 /* AppDelegate.h */,
 				C5E502AB1E63CC7A003F1943 /* AppDelegate.m */,
 			);
@@ -484,6 +494,7 @@
 		C5E503DC1E64190E003F1943 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C5ACE59B1F4AA9E60069978B /* placeholder */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -643,6 +654,7 @@
 		C5E504231E64190E003F1943 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				C5ACE5A11F4AADFF0069978B /* placeholder */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -805,7 +817,6 @@
 				TargetAttributes = {
 					C5E502A31E63CC7A003F1943 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = BX5E6477CY;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -847,10 +858,14 @@
 				C5E5047E1E64190F003F1943 /* ios-social-sdk-comment-quick.html in Resources */,
 				C5E5046B1E64190E003F1943 /* UMSocialLocalizable.strings in Resources */,
 				C5E5047D1E64190F003F1943 /* ios-social-sdk-comment-detail.html in Resources */,
+				C5ACE5A01F4AADEB0069978B /* placeholder in Resources */,
+				C5ACE5A21F4AADFF0069978B /* placeholder in Resources */,
+				C5ACE59C1F4AA9E60069978B /* placeholder in Resources */,
 				C5E504731E64190E003F1943 /* UMSnsAccountViewController.xib in Resources */,
 				C5E504801E64190F003F1943 /* ios-social-sdk-login-detail.html in Resources */,
 				C5E5047F1E64190F003F1943 /* ios-social-sdk-like.html in Resources */,
 				C5E504821E64190F003F1943 /* ios-social-sdk-shake.html in Resources */,
+				C5ACE59E1F4AA9F30069978B /* placeholder in Resources */,
 				C5E504851E64190F003F1943 /* ios-social-sdk-socialbar.html in Resources */,
 				C5E5047B1E64190F003F1943 /* iOS-social-analytics-releasenote.html in Resources */,
 				C5E504751E64190E003F1943 /* UMSocialSDKResourcesNew.bundle in Resources */,
@@ -1035,7 +1050,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1076,7 +1091,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -1089,7 +1104,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				DEVELOPMENT_TEAM = BX5E6477CY;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsComing/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
@@ -1121,7 +1136,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				DEVELOPMENT_TEAM = BX5E6477CY;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/NewsComing/Vendor/UM/UMSocial_Sdk_Extra_Frameworks/TencentOpenAPI",
