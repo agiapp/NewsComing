@@ -42,10 +42,6 @@
 //优秀的Json解析类库
 #import <MJExtension.h>
 
-//第三方对数据库的操作类库，是对系统Sqlite3的封装；使用SQL语句操作数据库
-//#import <FMDB/FMDB.h>
-
-
 //优秀的替换NSLog的第三方，更加省资源
 #import <CocoaLumberjack.h>
 #ifdef DEBUG
@@ -60,28 +56,14 @@ static const int ddLogLevel = DDLogLevelError;
 //纯代码书写AutoLayout的第三方类库（链式语法）
 #import <Masonry.h>
 
-//闪光效果
-//#import <FBShimmeringView.h>
-//#import <FBShimmeringLayer.h>
-
 //扁平化风格
 #import <FlatUIKit.h>
-
-//QQ的左侧菜单风格
-//#import <RESideMenu.h>
-
-//Cell滑动，出现多个功能按钮
-//#import <SWTableViewCell.h>
-
-//图片浏览器
-//#import <MWPhotoBrowser.h>
 
 //最低只需传两个数组即可完成tabBar搭建
 #import <CYLTabBarController.h>
 
+//后端云
 #import <BmobSDK/Bmob.h>
-//注册及登录
-#import <BmobSDK/BmobUser.h>
 
 //友盟
 //#import "UMSocial.h"

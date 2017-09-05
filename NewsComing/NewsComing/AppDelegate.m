@@ -30,7 +30,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self initializeWithApplication:application];
     
-    
     [NSThread sleepForTimeInterval:2];
     
     [self configGlobalUIStyle];
@@ -38,7 +37,8 @@
     //[UMSocialData setAppKey:kAppKey];
     //[UMSocialWechatHandler setWXAppId:@"wx945b58aef3a271f0" appSecret:@"0ae78dd42761fd9681b04833c79a857b" url:kURL];
     
-    [Bmob registerWithAppKey:@"160f7c6245ab95cfef879bf663e2fd32"];
+    // 初始化 Bmob后端云SDK。我们要使用它的登录注册服务(不用自己再去搭建服务器写接口)
+    [Bmob registerWithAppKey:@"ce4b84c6b6c43548636335b146fb98fc"];
     
     [self setupViewControllers];
     

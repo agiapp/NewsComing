@@ -80,7 +80,7 @@
             make.right.mas_equalTo(-20);
         }];
         [_registerBtn bk_addEventHandler:^(id sender) {
-            
+            // 使用 Bmob后端云的 注册服务
             BmobUser *bUser = [BmobUser new];
             [bUser setUsername:self.usernameTF.text];
             [bUser setPassword:self.passwdTF.text];
