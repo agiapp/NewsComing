@@ -20,9 +20,9 @@
  *  有的服务器对于中文字符串不支持，需要转化字符串为带有%号形式
  *
  *  @param path  请求的路径
- *  @param paras 请求的参数
+ *  @param params 请求的参数
  *
- *  @return 拼接出的字符串中的中文为%号形势（路径+参数）
+ *  @return 拼接出的字符串中的中文为%号形式（路径+参数）
  */
 + (NSString *)percentPathWithPath:(NSString *)path params:(NSDictionary *)params;
 

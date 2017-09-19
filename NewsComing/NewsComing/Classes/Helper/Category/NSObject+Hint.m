@@ -35,18 +35,18 @@
 }
 
 - (UIView *)currentView{
-    UIViewController *controller = [[[UIApplication sharedApplication] keyWindow] rootViewController];
+    UIViewController *vc = [UIApplication sharedApplication].keyWindow.rootViewController;
     
-    if ([controller isKindOfClass:[UITabBarController class]]) {
-        controller = [(UITabBarController *)controller selectedViewController];
+    if ([vc isKindOfClass:[UITabBarController class]]) {
+        vc = [(UITabBarController *)vc selectedViewController];
     }
-    if([controller isKindOfClass:[UINavigationController class]]) {
-        controller = [(UINavigationController *)controller visibleViewController];
+    if([vc isKindOfClass:[UINavigationController class]]) {
+        vc = [(UINavigationController *)vc visibleViewController]; //当前显示的控制器
     }
-    if (!controller) {
+    if (!vc) {
         return [UIApplication sharedApplication].keyWindow;
     }
-    return controller.view;
+    return vc.view;
 }
 
 @end
